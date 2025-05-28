@@ -42,5 +42,3 @@ WORKDIR /app/app
 
 # Reset the entrypoint, don't invoke `uv`
 ENTRYPOINT []
-
-
