@@ -16,6 +16,10 @@ ENV DEV=false
 ENV PYTHONUNBUFFERED=1
 
 # Install the project's dependencies using the lockfile and settings
+RUN apk add --update --no-cache postgresql-client && \
+    apk add --update --no-cache --virtual .tmp-build-deps \
+    build-base postgresql-dev musl-dev
+
 RUN --mount=type=cache,target=/root/.cache/uv \
     --mount=type=bind,source=uv.lock,target=uv.lock \
     --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
@@ -25,6 +29,7 @@ RUN --mount=type=cache,target=/root/.cache/uv \
     uv sync --locked --no-install-project --no-dev; \
     fi'
 
+
 # Then, add the rest of the project source code and install it
 # Installing separately from its dependencies allows optimal layer caching
 COPY . /app
@@ -33,7 +38,8 @@ RUN --mount=type=cache,target=/root/.cache/uv \
     uv sync; \
     else \
     uv sync --locked --no-dev; \
-    fi'
+    fi' && \
+    apk del .tmp-build-deps
 
 # Place executables in the environment at the front of the path
 ENV PATH="/app/.venv/bin:$PATH"
