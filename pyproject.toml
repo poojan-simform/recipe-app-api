@@ -54,7 +54,6 @@ select = [
     "C4", # flake8-comprehensions
     "ISC", # flake8-implicit-str-concat
     "PIE", # flake8-pie
-    "PT", # flake-pytest-style
     "PTH", # flake8-use-pathlib
     "PD", # pandas-vet
     "SIM", # flake8-simplify
