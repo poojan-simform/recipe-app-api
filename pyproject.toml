@@ -7,14 +7,15 @@ requires-python = ">=3.13"
 dependencies = [
     "django>=5.2.1",
     "djangorestframework>=3.16.0",
-    "psycopg[c]>=3.2.8"
+    "drf-spectacular>=0.28.0",
+    "psycopg[c]>=3.2.8",
 ]
 
 [dependency-groups]
 dev = [
     "pre-commit>=4.2.0",
     "ruff>=0.11.11",
-    {include-group = "type"}
+    { include-group = "type" }
 ]
 type = [
     "django-stubs>=5.2.0",
@@ -22,7 +23,7 @@ type = [
 ]
 [tool.ruff]
 exclude = [
-     "**/migrations/*.py",
+    "**/migrations/*.py",
     ".venv",
     ".eggs",
     ".git",
@@ -44,7 +45,7 @@ target-version = "py312"
 [tool.ruff.lint]
 ignore = ["ISC001", "D203", "D213", "D104"]
 select = [
-     "F", # pyflakes
+    "F", # pyflakes
     "E", # pycodestyle
     "I", # isort
     "N", # pep8-naming
@@ -67,7 +68,7 @@ dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
 [tool.ruff.lint.per-file-ignores]
 "**/migrations/**.py" = ["D100", "D101", "D102", "D103", "E501", "RUF012"]
 "**/tests/**/*.py" = ["S101", "E501", "PLR0917", "ISC001", "D100", "D101", "D102", "PLR0913", "PLR2004"]
-"**/*serializer*.py" = ["N815"]
+"**/*serializer*.py" = ["N815", "RUF012"]
 "**/views.py" = ["N815"]
 "**/__init__.py" = ["D104"]
 "**/models.py" = ["COM819"]
